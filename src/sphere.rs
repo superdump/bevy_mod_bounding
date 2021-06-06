@@ -46,7 +46,7 @@ impl BoundingVolume for BSphere {
         let vertices: Vec<Vec3> = match mesh.attribute(Mesh::ATTRIBUTE_POSITION) {
             None => panic!("Mesh does not contain vertex positions"),
             Some(vertex_values) => match &vertex_values {
-                VertexAttributeValues::Float3(positions) => positions
+                VertexAttributeValues::Float32x3(positions) => positions
                     .iter()
                     .map(|coordinates| Vec3::from(*coordinates))
                     .collect(),
@@ -112,7 +112,7 @@ impl BoundingVolume for BSphere {
         match mesh.attribute_mut(Mesh::ATTRIBUTE_POSITION) {
             None => panic!("Mesh does not contain vertex positions"),
             Some(vertex_values) => match vertex_values {
-                VertexAttributeValues::Float3(ref mut positions) => {
+                VertexAttributeValues::Float32x3(ref mut positions) => {
                     *positions = positions
                         .iter()
                         .map(|coordinates| {

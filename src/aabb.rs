@@ -98,7 +98,7 @@ impl BoundingVolume for Aabb {
         let vertices: Vec<Vec3> = match mesh.attribute(Mesh::ATTRIBUTE_POSITION) {
             None => panic!("Mesh does not contain vertex positions"),
             Some(vertex_values) => match &vertex_values {
-                VertexAttributeValues::Float3(positions) => positions
+                VertexAttributeValues::Float32x3(positions) => positions
                     .iter()
                     .map(|coordinates| transform_matrix.transform_point3(Vec3::from(*coordinates)))
                     .collect(),
@@ -117,7 +117,7 @@ impl BoundingVolume for Aabb {
         match mesh.attribute_mut(Mesh::ATTRIBUTE_POSITION) {
             None => panic!("Mesh does not contain vertex positions"),
             Some(vertex_values) => match vertex_values {
-                VertexAttributeValues::Float3(ref mut positions) => {
+                VertexAttributeValues::Float32x3(ref mut positions) => {
                     *positions = positions
                         .iter()
                         .map(|coordinates| {
